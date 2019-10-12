@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    {% include google_analytics.html %}
+    <meta charset="UTF-8">
+    {% seo %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name"><a style="color:white;" href="/">{{ site.title | default: site.github.repository_name }}</a></h1>
+      <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
+      <a href="/" class="btn">Home</a>
+      <a href="/about" class="btn">About</a>
+      <a href="/posts" class="btn">Posts</a>
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      {{ content }}
+      {% include disqus.html %}
+
+      <footer class="site-footer">
+          <span><a href="{{ site.github.owner_url }}">Github</a></span>
+          <span><a href="https://www.linkedin.com/in/daniellimanowski/">LinkedIn</a></span>
+          <span><a href="https://twitter.com/b1tst0rm">Twitter</a></span>
+      </footer>
+    </main>
+  </body>
+</html>

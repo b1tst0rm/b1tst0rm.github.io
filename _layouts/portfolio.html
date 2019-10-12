@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name"><a style="color:white;" href="/portfolio">Portfolio</a></h1>
+      <h2 class="project-tagline">of Daniel Limanowski</h2>
+      <a href="/portfolio/projects" class="btn">Projects</a>
+      <a href="/portfolio/work" class="btn">Work</a>
+      <a href="/portfolio/senior_design" class="btn">Senior Design</a>
+      <a href="/portfolio/reflection" class="btn">Reflection</a>
+      <a href="https://github.com/b1tst0rm/resume/blob/master/resume.pdf" class="btn" target="_blank">Resume (external)</a>
+      <a href="/portfolio/contact" class="btn">Contact</a>
+      <a href="/" class="btn">Back to blog</a>
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      {{ content }}
+
+      <footer class="site-footer">
+          <span><a href="{{ site.github.owner_url }}">Github</a></span>
+          <span><a href="https://www.linkedin.com/in/daniellimanowski/">LinkedIn</a></span>
+          <span><a href="https://twitter.com/b1tst0rm">Twitter</a></span>
+      </footer>
+    </main>
+  </body>
+</html>
