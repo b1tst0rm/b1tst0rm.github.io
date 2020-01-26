@@ -5,7 +5,7 @@ comments: false
 
 # Home
 
-Welcome to the (generally technical) blog.
+Welcome to the (generally technical) blog of Daniel Limanowski, aka b1tst0rm.
 
 ## Latest Post
 -------------
@@ -15,4 +15,4 @@ Welcome to the (generally technical) blog.
 
 ## What I do when not in front of a screen
 
-<iframe height='160' width='300' frameborder='0' allowtransparency='true' scrolling='no' src='https://www.strava.com/athletes/49760247/activity-summary/bf5a15cbbf8399c0b2829a3779ec7bcded683d02'></iframe>
+<iframe height='200' width='350' frameborder='0' allowtransparency='true' scrolling='no' src='https://www.strava.com/athletes/49760247/activity-summary/bf5a15cbbf8399c0b2829a3779ec7bcded683d02'></iframe>
