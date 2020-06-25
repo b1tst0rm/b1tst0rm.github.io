@@ -12,32 +12,32 @@
 </script>
 
     <meta charset="UTF-8">
-    <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Using Facebook’s Certificate Transparency Tool to detect phishing | B1tst0rm</title>
-<meta name="generator" content="Jekyll v3.7.4" />
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Using Facebook’s Certificate Transparency Tool to detect phishing | Daniel Limanowski</title>
+<meta name="generator" content="Jekyll v3.8.7" />
 <meta property="og:title" content="Using Facebook’s Certificate Transparency Tool to detect phishing" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Using Facebook’s Certificate Transparency Tool to detect phishing Signed SSL certificates are handed out by trusted organizations for specific domains to verify to the end user that the server is who they say they are. Many browsers display a lock symbol to indicate that the content is being served over the encrypted HTTPS protocol and will not display errors or warnings if the certificate was issued legitimately (ie., not self-signed). However, anyone can acquire domains and signed SSL certificates for little-to-no-cost, including the bad guys." />
 <meta property="og:description" content="Using Facebook’s Certificate Transparency Tool to detect phishing Signed SSL certificates are handed out by trusted organizations for specific domains to verify to the end user that the server is who they say they are. Many browsers display a lock symbol to indicate that the content is being served over the encrypted HTTPS protocol and will not display errors or warnings if the certificate was issued legitimately (ie., not self-signed). However, anyone can acquire domains and signed SSL certificates for little-to-no-cost, including the bad guys." />
 <link rel="canonical" href="http://localhost:4000/2019/06/11/certguard.html" />
 <meta property="og:url" content="http://localhost:4000/2019/06/11/certguard.html" />
-<meta property="og:site_name" content="B1tst0rm" />
+<meta property="og:site_name" content="Daniel Limanowski" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-06-11T00:00:00-05:00" />
+<meta property="article:published_time" content="2019-06-11T00:00:00-07:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","url":"http://localhost:4000/2019/06/11/certguard.html","headline":"Using Facebook’s Certificate Transparency Tool to detect phishing","dateModified":"2019-06-11T00:00:00-05:00","datePublished":"2019-06-11T00:00:00-05:00","description":"Using Facebook’s Certificate Transparency Tool to detect phishing Signed SSL certificates are handed out by trusted organizations for specific domains to verify to the end user that the server is who they say they are. Many browsers display a lock symbol to indicate that the content is being served over the encrypted HTTPS protocol and will not display errors or warnings if the certificate was issued legitimately (ie., not self-signed). However, anyone can acquire domains and signed SSL certificates for little-to-no-cost, including the bad guys.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2019/06/11/certguard.html"},"@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","headline":"Using Facebook’s Certificate Transparency Tool to detect phishing","dateModified":"2019-06-11T00:00:00-07:00","datePublished":"2019-06-11T00:00:00-07:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2019/06/11/certguard.html"},"description":"Using Facebook’s Certificate Transparency Tool to detect phishing Signed SSL certificates are handed out by trusted organizations for specific domains to verify to the end user that the server is who they say they are. Many browsers display a lock symbol to indicate that the content is being served over the encrypted HTTPS protocol and will not display errors or warnings if the certificate was issued legitimately (ie., not self-signed). However, anyone can acquire domains and signed SSL certificates for little-to-no-cost, including the bad guys.","url":"http://localhost:4000/2019/06/11/certguard.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=f348264c158ee898f8c8b0287351c6554322efb6">
+    <link rel="stylesheet" href="/assets/css/style.css?v=3f5dd6d4d4aaf8abcf06cb81e4ea1d2f6b17a5dc">
   </head>
   <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     <header class="page-header" role="banner">
-      <h1 class="project-name"><a style="color:white;" href="/">B1tst0rm</a></h1>
+      <h1 class="project-name"><a style="color:white;" href="/">Daniel Limanowski</a></h1>
       <h2 class="project-tagline">the red team is watching</h2>
       <a href="/" class="btn">Home</a>
       <a href="/about" class="btn">About</a>
@@ -68,8 +68,8 @@ could be used for phishing.</p>
 
 <h2 id="phishing-domain-monitoring">Phishing Domain Monitoring</h2>
 <p>Domains are human readable addresses that we implicitly, and perhaps subconciously,
-place trust in. A link to download a file from <code class="highlighter-rouge">172.217.11.238</code> is much more alarming
-than <code class="highlighter-rouge">drive.google.com</code>. Attackers use trusted domain names to trick and phish
+place trust in. A link to download a file from <code class="language-plaintext highlighter-rouge">172.217.11.238</code> is much more alarming
+than <code class="language-plaintext highlighter-rouge">drive.google.com</code>. Attackers use trusted domain names to trick and phish
 victims, usually via email.</p>
 
 <p>Attackers can perform a number of domain “tricks” to register what look almost
@@ -82,34 +82,34 @@ they can detect the following phishing domains:</p>
 <p>An attacker can register a domain that appears the same, but consists of different
 unicode characters.</p>
 
-<p>For example: <code class="highlighter-rouge">faceb00k[.]com</code>: the letter <code class="highlighter-rouge">o</code>’s in <code class="highlighter-rouge">facebook</code> are replaced by the
+<p>For example: <code class="language-plaintext highlighter-rouge">faceb00k[.]com</code>: the letter <code class="language-plaintext highlighter-rouge">o</code>’s in <code class="language-plaintext highlighter-rouge">facebook</code> are replaced by the
 number zero.</p>
 
-<p>Another example: <code class="highlighter-rouge">facebook[.]com</code>: the letter <code class="highlighter-rouge">о</code> is actually the Cyrillic small
-letter <code class="highlighter-rouge">o</code> (0x43E), not the Latin <code class="highlighter-rouge">o</code> (0x6F).</p>
+<p>Another example: <code class="language-plaintext highlighter-rouge">facebook[.]com</code>: the letter <code class="language-plaintext highlighter-rouge">о</code> is actually the Cyrillic small
+letter <code class="language-plaintext highlighter-rouge">o</code> (0x43E), not the Latin <code class="language-plaintext highlighter-rouge">o</code> (0x6F).</p>
 
 <h3 id="typo-squatting">Typo-squatting</h3>
 <p>Similar domains that have typos can look like the real thing at first glance,
 prompting victims to trust a link.</p>
 
-<p>For example: <code class="highlighter-rouge">gooogle.com</code></p>
+<p>For example: <code class="language-plaintext highlighter-rouge">gooogle.com</code></p>
 
 <h3 id="mobile-screens">Mobile Screens</h3>
 <p>Mobile browsers often show only the first part of a domain in the URL bar if the
 domain is too long. Therefore, an attacker can register a long domain name
 and use subdomains to trick users.</p>
 
-<p>If I registered <code class="highlighter-rouge">xxxxxxxxxxxxxxxxxxxxyyyyyyyyyyyyyyzzzzzzzzzz.com</code>, I can create a
-DNS record for <code class="highlighter-rouge">google.com.xxxxxxxxxxxxxxxxxxxxyyyyyyyyyyyyyyzzzzzzzzzz.com</code> and
-on some devices it is possible that only <code class="highlighter-rouge">google.com</code> would actually be displayed
+<p>If I registered <code class="language-plaintext highlighter-rouge">xxxxxxxxxxxxxxxxxxxxyyyyyyyyyyyyyyzzzzzzzzzz.com</code>, I can create a
+DNS record for <code class="language-plaintext highlighter-rouge">google.com.xxxxxxxxxxxxxxxxxxxxyyyyyyyyyyyyyyzzzzzzzzzz.com</code> and
+on some devices it is possible that only <code class="language-plaintext highlighter-rouge">google.com</code> would actually be displayed
 in the URL bar.</p>
 
 <h3 id="combo-squatting">Combo squatting</h3>
 <p>Attackers can register domains with a trusted site’s name in combination with
 some other item.</p>
 
-<p>For example, XYZ Fake Corp’s domain is <code class="highlighter-rouge">xyzcorp.com</code>. I can register
-<code class="highlighter-rouge">it-xyzcorp.com</code> and impersonate the IT department in my phishing emails.</p>
+<p>For example, XYZ Fake Corp’s domain is <code class="language-plaintext highlighter-rouge">xyzcorp.com</code>. I can register
+<code class="language-plaintext highlighter-rouge">it-xyzcorp.com</code> and impersonate the IT department in my phishing emails.</p>
 
 <h2 id="using-facebooks-phishing-detection-tool">Using Facebook’s Phishing Detection Tool</h2>
 <p>Now that we’ve seen what the tool is capable of detecting from the CT logs,
@@ -124,14 +124,14 @@ very similar for Slack.</p>
   <li>Before using Facebook’s APIs, we’ll need a Facebook account. If you do not already
 have one, you must create an account and log in to proceed.</li>
   <li>Head to <a href="https://developer.facebook.com/">Facebook’s developer site</a> and select
-<code class="highlighter-rouge">My Apps</code> –&gt; <code class="highlighter-rouge">Add New App</code>. You’ll be prompted for App ID info including an app
+<code class="language-plaintext highlighter-rouge">My Apps</code> –&gt; <code class="language-plaintext highlighter-rouge">Add New App</code>. You’ll be prompted for App ID info including an app
 name and contact email. Just fill these out with whatever seems right to you.
 <img src="/assets/images/new_fb_app.png" alt="Creating a new Facebook app" /></li>
   <li>You’ll be redirected to the Facebook App dashboard. On the left side of the page,
-click the + symbol by <code class="highlighter-rouge">Products</code> and scroll until you find the Webhooks. Select
-<code class="highlighter-rouge">Set Up</code> to begin configuring our Webhook service.
+click the + symbol by <code class="language-plaintext highlighter-rouge">Products</code> and scroll until you find the Webhooks. Select
+<code class="language-plaintext highlighter-rouge">Set Up</code> to begin configuring our Webhook service.
 <img src="/assets/images/create_webhook.png" alt="Selecting the webhook" /></li>
-  <li>Click <code class="highlighter-rouge">Subscribe to this object</code>. You’ll be prompted for a Callback URL (ie.,
+  <li>Click <code class="language-plaintext highlighter-rouge">Subscribe to this object</code>. You’ll be prompted for a Callback URL (ie.,
 what Facebook will post alert information to) as well as a security token. Since
 we don’t have this information now, let’s leave this page be and head to the next
 milestone.</li>
@@ -194,8 +194,8 @@ will work just as well.</p>
 walk you through it step-by-step.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">logging</span>  <span class="c"># for CloudWatch logs</span>
-<span class="kn">from</span> <span class="nn">botocore.vendored</span> <span class="kn">import</span> <span class="n">requests</span>
+<span class="kn">import</span> <span class="nn">logging</span>  <span class="c1"># for CloudWatch logs
+</span><span class="kn">from</span> <span class="nn">botocore.vendored</span> <span class="kn">import</span> <span class="n">requests</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="n">TEAMS_ENDPOINT</span> <span class="o">=</span> <span class="s">"SET THIS (ie., https://outlook.office.com/webhook/...)"</span>
@@ -203,7 +203,7 @@ walk you through it step-by-step.</p>
 </code></pre></div></div>
 <p>This first chunk of code imports some necessary modules. We’ll set up logging
 using AWS’s CloudWatch for monitoring and debugging purposes later.
-You’ll need to set <code class="highlighter-rouge">TEAMS_ENDPOINT</code> to your Microsoft Teams Webhook URL.
+You’ll need to set <code class="language-plaintext highlighter-rouge">TEAMS_ENDPOINT</code> to your Microsoft Teams Webhook URL.
 Let’s fetch that now. Head to your Microsoft Teams application (web or desktop).</p>
 
 <p><img src="/assets/images/connectors.png" alt="Connector in Teams" /></p>
@@ -221,7 +221,7 @@ Copy that URL, it’s what we need to set TEAMS_ENDPOINT to in our Lamdba code.<
   <li>Now you can hit “Done” on the Teams dialog box.</li>
 </ol>
 
-<p>Set the <code class="highlighter-rouge">SECURITY_TOKEN</code> in your Lambda function code to (ideally) a
+<p>Set the <code class="language-plaintext highlighter-rouge">SECURITY_TOKEN</code> in your Lambda function code to (ideally) a
 randomly-generated string of any size. You’ll configure your Facebook app
 later with this access token.</p>
 
@@ -270,71 +270,71 @@ but it should work out-of-the-box for you.</p>
 
 <p>Next I configure a logger for AWS Cloudwatch. This isn’t neccessary, but if
 you’d like to log Lambda usage for debugging purposes it is very helpful:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="p">.</span><span class="n">getLogger</span><span class="p">()</span>
+<span class="n">logger</span><span class="p">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="p">.</span><span class="n">INFO</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Now for the juicy part: the actual “Lamdba function” that is called when
 our API gets data from Facebook. The request data is stored in a variable
-called <code class="highlighter-rouge">event</code> containing JSON data. First I define the function and perform
+called <code class="language-plaintext highlighter-rouge">event</code> containing JSON data. First I define the function and perform
 some logging:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'got event {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">event</span><span class="p">))</span>
-    <span class="n">retval</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+    <span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">'got event {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">event</span><span class="p">))</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>If you dig into <a href="https://developers.facebook.com/docs/certificate-transparency-api/">Facebook’s API docs</a>, it states that the API periodically sends
 a GET request to verify our endpoint is up and working. We check their
-<code class="highlighter-rouge">verify_token</code> value against our <code class="highlighter-rouge">SECURITY_TOKEN</code> and if they are the same,
+<code class="language-plaintext highlighter-rouge">verify_token</code> value against our <code class="language-plaintext highlighter-rouge">SECURITY_TOKEN</code> and if they are the same,
 we respond with a 200, letting Facebook know we are alive and ready to
 receive info.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s">'httpMethod'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'GET'</span><span class="p">):</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s">'queryStringParameters'</span><span class="p">][</span><span class="s">'hub.verify_token'</span><span class="p">]</span> <span class="o">==</span>
                 <span class="n">SECURITY_TOKEN</span><span class="p">):</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'API GET call successful'</span><span class="p">)</span>
+            <span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">'API GET call successful'</span><span class="p">)</span>
             <span class="k">return</span> <span class="p">{</span>
                 <span class="s">'statusCode'</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
                 <span class="s">'body'</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="s">'queryStringParameters'</span><span class="p">][</span><span class="s">'hub.challenge'</span><span class="p">]</span>
             <span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">'API GET call failed'</span><span class="p">)</span>
+            <span class="n">logger</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s">'API GET call failed'</span><span class="p">)</span>
             <span class="k">return</span> <span class="p">{</span>
                 <span class="s">'statusCode'</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
                 <span class="s">'body'</span><span class="p">:</span> <span class="s">'Something went wrong'</span>
             <span class="p">}</span>	
 </code></pre></div></div>
 
-<p>The only other type of request we should receive from Facebook is a <code class="highlighter-rouge">POST</code>.
-The <code class="highlighter-rouge">POST</code> requests are Facebook sending us alert info. Below we handle this
+<p>The only other type of request we should receive from Facebook is a <code class="language-plaintext highlighter-rouge">POST</code>.
+The <code class="language-plaintext highlighter-rouge">POST</code> requests are Facebook sending us alert info. Below we handle this
 by extracting the alert info and sending it to another function to
 create a new MS Teams message for each phishing domain. Finally, we respond
 to Facebook with a 200.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">elif</span> <span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s">'httpMethod'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'POST'</span><span class="p">):</span>
-        <span class="c"># Fetch the JSON body from Facebook</span>
-        <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s">'body'</span><span class="p">])</span>
+        <span class="c1"># Fetch the JSON body from Facebook
+</span>        <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s">'body'</span><span class="p">])</span>
         
         <span class="k">try</span><span class="p">:</span>
-            <span class="c"># If more than one alert in the payload</span>
-            <span class="n">changes_value</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s">'entry'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'changes'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'value'</span><span class="p">]</span>
+            <span class="c1"># If more than one alert in the payload
+</span>            <span class="n">changes_value</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s">'entry'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'changes'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'value'</span><span class="p">]</span>
             <span class="n">domains</span> <span class="o">=</span> <span class="n">changes_value</span><span class="p">[</span><span class="s">'phishing_domains'</span><span class="p">]</span>
             <span class="n">original_domain</span> <span class="o">=</span> <span class="n">changes_value</span><span class="p">[</span><span class="s">'phished_domain'</span><span class="p">]</span>
             
             <span class="k">for</span> <span class="n">domain</span> <span class="ow">in</span> <span class="n">domains</span><span class="p">:</span>
-                <span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcfromtimestamp</span><span class="p">(</span>
+                <span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">utcfromtimestamp</span><span class="p">(</span>
                     <span class="nb">int</span><span class="p">(</span><span class="n">body</span><span class="p">[</span><span class="s">'entry'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'time'</span><span class="p">])</span>
-                <span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">'</span><span class="si">%</span><span class="s">Y-</span><span class="si">%</span><span class="s">m-</span><span class="si">%</span><span class="s">d </span><span class="si">%</span><span class="s">H:</span><span class="si">%</span><span class="s">M:</span><span class="si">%</span><span class="s">S'</span><span class="p">)</span> <span class="o">+</span> <span class="s">" UTC"</span>
+                <span class="p">).</span><span class="n">strftime</span><span class="p">(</span><span class="s">'%Y-%m-%d %H:%M:%S'</span><span class="p">)</span> <span class="o">+</span> <span class="s">" UTC"</span>
                 <span class="n">relay_alert</span><span class="p">(</span><span class="n">original_domain</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="nb">KeyError</span><span class="p">:</span>
-            <span class="c"># If just one alert in the body</span>
-            <span class="n">mal_domain</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s">'value'</span><span class="p">][</span><span class="s">'phishing_domains'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># If just one alert in the body
+</span>            <span class="n">mal_domain</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s">'value'</span><span class="p">][</span><span class="s">'phishing_domains'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">original_domain</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s">'value'</span><span class="p">][</span><span class="s">'phished_domain'</span><span class="p">]</span>
-            <span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcfromtimestamp</span><span class="p">(</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">utcfromtimestamp</span><span class="p">(</span>
                 <span class="nb">int</span><span class="p">(</span><span class="n">body</span><span class="p">[</span><span class="s">'time'</span><span class="p">])</span>
-            <span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">'</span><span class="si">%</span><span class="s">Y-</span><span class="si">%</span><span class="s">m-</span><span class="si">%</span><span class="s">d </span><span class="si">%</span><span class="s">H:</span><span class="si">%</span><span class="s">M:</span><span class="si">%</span><span class="s">S'</span><span class="p">)</span> <span class="o">+</span> <span class="s">" UTC"</span>
+            <span class="p">).</span><span class="n">strftime</span><span class="p">(</span><span class="s">'%Y-%m-%d %H:%M:%S'</span><span class="p">)</span> <span class="o">+</span> <span class="s">" UTC"</span>
             <span class="n">relay_alert</span><span class="p">(</span><span class="n">original_domain</span><span class="p">,</span> <span class="n">mal_domain</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="p">{</span>
@@ -346,7 +346,7 @@ to Facebook with a 200.</p>
 <p>If we get any other type of  HTTP request, we log it and respond
 with a 400:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">else</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">'Invalid HTTP method hit'</span><span class="p">)</span>
+        <span class="n">logger</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s">'Invalid HTTP method hit'</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s">'statusCode'</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
             <span class="s">'body'</span><span class="p">:</span> <span class="s">'Invalid HTTP Method'</span>
@@ -362,12 +362,12 @@ and fire off a POST request to the Teams endpoint configured earlier:</p>
     Given the original domain, malicious/phishing domain, and time of
     occurrence, sends an alert to Teams endpoint using a formatted Card.
     """</span>
-    <span class="n">card_to_send</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">TEAMS_CARD</span><span class="p">)</span>
+    <span class="n">card_to_send</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">TEAMS_CARD</span><span class="p">)</span>
     <span class="n">card_to_send</span><span class="p">[</span><span class="s">'text'</span><span class="p">]</span> <span class="o">+=</span> <span class="s">'**'</span> <span class="o">+</span> <span class="n">orig_domain</span> <span class="o">+</span> <span class="s">'**'</span>
     <span class="n">card_to_send</span><span class="p">[</span><span class="s">'sections'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'title'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'**'</span> <span class="o">+</span> <span class="n">mal_domain</span> <span class="o">+</span> <span class="s">'**'</span>
     <span class="n">card_to_send</span><span class="p">[</span><span class="s">'sections'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'facts'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'value'</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span>
-    <span class="n">json_teams_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">card_to_send</span><span class="p">)</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">TEAMS_ENDPOINT</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json_teams_str</span><span class="p">)</span>
+    <span class="n">json_teams_str</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">card_to_send</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">TEAMS_ENDPOINT</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json_teams_str</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h3 id="milestone-4-final-facebook-config">Milestone 4: Final Facebook Config</h3>
@@ -375,12 +375,12 @@ and fire off a POST request to the Teams endpoint configured earlier:</p>
 Facebook app.</p>
 
 <ol>
-  <li>Open up <code class="highlighter-rouge">https://developers.facebook.com/</code> and head to your app we made earlier.</li>
+  <li>Open up <code class="language-plaintext highlighter-rouge">https://developers.facebook.com/</code> and head to your app we made earlier.</li>
   <li>Under Products –&gt; Webhooks, select “Subscribe to this object” with “Certificate Transparency”
-being selected. A popup dialog will appear. For <code class="highlighter-rouge">Callback URL</code> input your Invoke URL 
+being selected. A popup dialog will appear. For <code class="language-plaintext highlighter-rouge">Callback URL</code> input your Invoke URL 
 from AWS. It should look something like:
-<code class="highlighter-rouge">https://XYZ.execute-api.us-XYZ-N.amazonaws.com/default/YOURAPINAMEHERE</code>
-For <code class="highlighter-rouge">Verify Token</code>, paste in the value of <code class="highlighter-rouge">SECURITY_TOKEN</code> variable in your Lambda Function.
+<code class="language-plaintext highlighter-rouge">https://XYZ.execute-api.us-XYZ-N.amazonaws.com/default/YOURAPINAMEHERE</code>
+For <code class="language-plaintext highlighter-rouge">Verify Token</code>, paste in the value of <code class="language-plaintext highlighter-rouge">SECURITY_TOKEN</code> variable in your Lambda Function.
 Clicking Verify and Save will fire off a test to ensure the endpoint is functioning.
 If everything goes well, the dialog box will close without error.</li>
   <li>Under phishing hit Subscribe. The Lambda code is written to work with API v3.3.
@@ -430,7 +430,7 @@ spearheaded ones.</p>
 
 
       <footer class="site-footer">
-          <span><a href="http://github.com/b1tst0rm">Github</a></span>
+          <span><a href="https://github.com/b1tst0rm">Github</a></span>
           <span><a href="https://www.linkedin.com/in/daniellimanowski/">LinkedIn</a></span>
           <span><a href="https://twitter.com/b1tst0rm">Twitter</a></span>
       </footer>
