@@ -1,7 +1,7 @@
 title: Daniel Limanowski
 description: the red team is watching
 show_downloads: false
-theme: jekyll-theme-leap-day
+theme: jekyll-theme-slate
 disqus:
     shortname: b1tst0rm
 url: "https://b1tst0rm.net"
