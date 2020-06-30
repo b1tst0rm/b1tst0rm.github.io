@@ -17,7 +17,7 @@ I'm also big on [entrepreneurship](https://relatrace.com) and think sales and ma
 {{ site.posts.first.date | date_to_long_string }}
 
 ## Talks and other content
-TALK [Bsides Iowa 2019: "Car Hacking 101: The CAN Bus"](https://youtu.be/yZRRwXqvrOg/vehicle_security)
+TALK [Bsides Iowa 2019: "Car Hacking 101: The CAN Bus"](https://youtu.be/yZRRwXqvrOg)
 
 TALK [Information Assurance Student Group 2019: "An overview of vehicle security"](https://youtu.be/VKr5BZJ4dpA)
 
