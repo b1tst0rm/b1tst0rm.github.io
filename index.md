@@ -5,7 +5,7 @@ comments: false
 
 # Home
 
-Welcome to the (generally technical) blog of Daniel Limanowski, aka b1tst0rm.
+Welcome to the blog.
 
 ## Latest Post
 -------------
