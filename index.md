@@ -23,10 +23,8 @@ TALK [Information Assurance Student Group 2019: "An overview of vehicle security
 
 FILM [Short blue team security film I wrote/directed w/ sponsorship from Iowa State and Hak5](https://youtu.be/UZi18g8hH0Q)
 
-## What I do when not in front of a screen
+## Résumé
 
-<iframe height='200' width='350' frameborder='0' allowtransparency='true' scrolling='no' src='https://www.strava.com/athletes/49760247/activity-summary/bf5a15cbbf8399c0b2829a3779ec7bcded683d02'></iframe>
+[View](https://github.com/b1tst0rm/resume/blob/master/resume.pdf)
 
-## Contact me
-
-See my socials in the footer.
+[Download](https://github.com/b1tst0rm/resume/raw/master/resume.pdf)
