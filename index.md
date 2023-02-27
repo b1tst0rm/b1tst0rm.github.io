@@ -5,11 +5,9 @@ comments: false
 
 # Home
 
-Welcome to the blog.
-
-My name is Daniel Limanowski, and I enjoy networking (the technical and meeting new people kind!), offensive security, programming, and automation.
-
-I'm also big on [entrepreneurship](https://relatrace.com) and think sales and marketing are (almost) as exciting as tech.
+Welcome to my blog, where I share insights and experiences as a cyber security
+professional with a passion for creating, coding, and automating in small teams
+and fast paced environments.
 
 ## Latest Post
 
@@ -25,6 +23,4 @@ FILM [Short blue team security film I wrote/directed w/ sponsorship from Iowa St
 
 ## Résumé
 
-[View](https://github.com/b1tst0rm/resume/blob/master/resume.pdf)
-
-[Download](https://github.com/b1tst0rm/resume/raw/master/resume.pdf)
+[View](https://drive.google.com/file/d/17tevb-w9I3AEcdmjIkEZJ7GcPcKpAtwt/view?usp=share_link)
